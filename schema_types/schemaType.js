@@ -15,3 +15,37 @@ console.log('naya id:-',newId)
 //?This is a shorthand provided by Mongoose to make schemas easier to define.
 
 
+//?Options are modifiers or attributes that you apply to these schema types to customize how they are stored, validated, accessed, and presented. 
+
+
+//? required: boolean or function, if true adds a required validator for this property
+//? default: Any or function, sets a default value for the path. If the value is a function, the return value of the function is used as the default.
+//? select: boolean, specifies default projections for queries
+//? validate: function, adds a validator function for this property
+//? get: function, defines a custom getter for this property using Object.defineProperty().
+//? set: function, defines a custom setter for this property using Object.defineProperty().
+//? alias: string, mongoose >= 4.10.0 only. Defines a virtual with the given name that gets/sets this path.
+//? immutable: boolean, defines path as immutable. Mongoose prevents you from changing immutable paths unless the parent document has isNew: true.
+//? transform: function, Mongoose calls this function when you call Document#toJSON() function, including when you JSON.stringify() a document.
+
+
+import { connectDb } from '../config/connect.db.js'
+connectDb()
+
+
+const rootUrl='./assets/image'
+const  userSchema=new mongoose.Schema({
+    name:String,
+    profileImg:{
+        type:String,
+        get:(v)=>(`${rootUrl}${v}`)
+    }
+})
+
+const User=mongoose.model('User',userSchema)
+
+const user=new User({name:'prajwol',profileImg:'/123.png'})
+
+//? in actual database only /123.png will be stored but when we conver to json it will call that get function and set the full path or we have to manullay call it.
+
+console.log(user.profileImg)
