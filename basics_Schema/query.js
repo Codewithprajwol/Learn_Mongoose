@@ -23,6 +23,8 @@ const User=mongoose.model('User',userSchema)
 const user= new User({name:'prajwol',email:'hello@gmail.com',password:'rampleasehelpme'})
 
 console.log(user)
-   const data=await User.find().byName('prajwol')
+   const data=await User.find().byName('prajwol')//?like this and we get the document of name where name is 'prajwol'
    console.log(data)
+
 await user.save()
+ 
