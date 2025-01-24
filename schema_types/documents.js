@@ -53,6 +53,8 @@ console.log(doc instanceof mongoose.Document)// true
 
 //?so what you have to understand is that 1.when you create a model using model.create it is the instance of mongoose.Model and it return the constructor function where we can create a document and that document is the instance of mongoose.document
 
+//? i think behind the scene what would have happen when we call mongoose.model() it return the constructor function along with methods into it's prototype and when we call that constructor function it will have the method inside it like save , validate ,to object like this is only my assumption 
+
 //? now let's talk about validation
 
 const personSchema=new mongoose.Schema({
