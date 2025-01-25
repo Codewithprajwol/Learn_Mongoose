@@ -7,13 +7,15 @@ const userSchema=new mongoose.Schema({
     name:String,
     age:Number
 })
+console.log(userSchema)//? it is an pure object the it returns and it hold another objects..
 function autoTimeStamp(schema){
-    schema.add({createAt:Date})
+    schema.add({createdAt:Date})
 
-    schema.pre('save',(next)=>{
+    schema.pre('save',function(next){
         if(!this.createdAt){
             this.createdAt=new Date()
         }
+        console.log('i am here')
         next();
     })
 }
